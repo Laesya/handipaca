@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Type_Handicap.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'id', as:'creator'});
+
     }
   };
   Type_Handicap.init({
