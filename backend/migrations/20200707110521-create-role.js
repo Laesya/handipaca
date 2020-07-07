@@ -8,14 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      admin: {
-        type: Sequelize.BOOLEAN
-      },
-      editor: {
-        type: Sequelize.BOOLEAN
-      },
-      user: {
-        type: Sequelize.BOOLEAN
+      name: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
