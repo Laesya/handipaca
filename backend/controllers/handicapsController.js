@@ -53,8 +53,4 @@ module.exports = {
             ;})
         .catch((error) => res.status(404).json({error, message: `Handicap with id ${req.params.id} was not found`}))
     },
-
-//GET le profil public d'un utilisateur
-//GET le profil privé d'un utilisateur
-//UPDATE le profil privé d'un utilisateur
 }
