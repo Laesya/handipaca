@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Place.belongsToMany(models.Layout, { through: "PlaceHasLayouts", foreignKey:"placeId", as: 'layouts'})
     }
   };
   Place.init({

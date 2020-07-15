@@ -9,10 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       placeId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        allowNull: false,
+        references : {
+          model : "Places",
+          key: "id",
+        }
       },
       layoutId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        allowNull: false,
+        references : {
+          model : "Layouts",
+          key: "id",
+        }
       },
       createdAt: {
         allowNull: false,
