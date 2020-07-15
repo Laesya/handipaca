@@ -10,7 +10,7 @@ module.exports = {
         User.findAll({
             where: {
               roleId: 1
-            }
+            },
           })
         .then((users) => { 
             if (users) {

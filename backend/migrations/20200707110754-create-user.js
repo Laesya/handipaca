@@ -23,8 +23,12 @@ module.exports = {
       hasHandicap: {
         type: Sequelize.BOOLEAN
       },
-      roleId: {
-        type: Sequelize.INTEGER
+      roleId: { 
+        type: Sequelize.INTEGER,
+        references: { 
+         model: 'Roles', 
+         key: 'id' 
+        }
       },
       createdAt: {
         allowNull: false,
