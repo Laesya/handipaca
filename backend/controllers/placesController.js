@@ -1,5 +1,6 @@
 // Imports
 var models = require('../models');
+const placehaslayout = require('../models/placehaslayout');
 const Place = models.Place;
 
 // Routes

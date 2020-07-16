@@ -5,21 +5,6 @@ const User = models.User;
 // Routes
 module.exports = {
 
-// CREATE USERS
-    createUser: function(req, res) {
-        User.create({
-            pseudonym: req.body.pseudonym,
-            email: req.body.email,
-            password: req.body.password,
-            liveIn: req.body.liveIn,
-            hasHandicap: req.body.hasHandicap,
-            RoleId: req.body.RoleId
-        })
-        .then((user) => { res.status(201).json({ user });             
-        })
-        .catch((error) => res.status(500).json({ error }));
-    },
-
 //GET les admins
     getAdmins: function(req, res) {
         User.findAll({
