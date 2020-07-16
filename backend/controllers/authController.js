@@ -5,37 +5,50 @@ const bcrypt = require('bcrypt');
 
 module.exports =  {
     signIn : function(req, res) {
+        /* By default passport save authenticated user in req.user object */
         const user =  {
             id: req.user.id,
             email: req.user.email,
-            RoleId: 3
+            roleId: 3
         };
         const token = jwt.sign(user, process.env.JWT_SECRET);
         res.json({ user, token });
     },
 
-    signUp : function (req, res) {
-        User.create({
-            pseudonym: req.body.pseudonym,
-            email: req.body.email,
-            password: req.body.password,
-            liveIn: req.body.liveIn,
-            hasHandicap: req.body.hasHandicap,
-            RoleId: 3
+    signUp : function (req, res) { 
+        let pseudonym = req.body.pseudonym;
+        let email = req.body.email;
+        let password =req.body.password;
+        let liveIn = req.body.liveIn;
+        let hasHandicap = req.body.hasHandicap;
+        let roleId = req.body.roleId || 3;    
+        
+        if(email == null || password == null ){
+            return res.status(400).json({ 'error' : 'missing parameters' })
+        }
+        bcrypt.hash(password, 5, function(err, bcryptedPassword){
+            User.create({
+                pseudonym: pseudonym,
+                email: email,
+                password: bcryptedPassword,
+                liveIn: liveIn,
+                hasHandicap: hasHandicap,
+                roleId: roleId
+            })
+            .then((newUser) => {
+                const user =  {
+                    id: newUser.id,
+                    email: newUser.email,
+                    password: newUser.password,
+                    roleId: newUser.roleId
+                };    
+                const token = jwt.sign(user, process.env.JWT_SECRET);
+                res.status(201).json({ user, token });
+                })
+            .catch((err) => {
+                res.status(503).json(err);
+            });
         })
-        .then((newUser) => {
-            const user =  {
-                id: newUser.id,
-                email: newUser.email,
-                password: newUser.password,
-                RoleId: newUser.RoleId
-            };
-            const token = jwt.sign(user, process.env.JWT_SECRET);
-            res.json({ user, token });
-        })
-        .catch((err) => {
-            res.status(503).json(err);
-        });
     },
 
     deleteAccount : function(res, req, next) {
