@@ -8,7 +8,7 @@ module.exports = {
 
 //CREATE une place
     createPlace: function(req, res) {
-        Place.create({
+        /*Place.create({
             name: req.body.name,
             street: req.body.street,
             nbStreet: req.body.nbStreet,
@@ -21,10 +21,23 @@ module.exports = {
         .then((place) => { res.status(201).json({ place });             
         })
         .catch((error) => res.status(500).json({ error }));
+    },*/
+        Place.create({
+            name: req.body.name,
+            street: req.body.street,
+            nbStreet: req.body.nbStreet,
+            city: req.body.city,
+            zip: req.body.zip,
+            note: req.body.note,
+            typePlaceId: req.body.typePlaceId,
+            userId: req.body.userId,
+        }, { include: ['layouts'] })
+        .then((place) => { res.status(201).json({ place });})
+        .catch((error) => res.status(500).json({ error }));
     },
 
 //GET les places
-    getPlaces: function(req, res) {
+    /*getPlaces: function(req, res) {
         Place.findAll({include: { association: '{all: true }'}})
         .then((places) => { 
             if (places) {
@@ -34,11 +47,22 @@ module.exports = {
             }    
          })
         .catch((error) => { res.status(500).json({ error}) });
-    },
+    },*/
+    getPlaces: (req, res, next) => {
+        Place.findAll({ include: { all: true, nested: true } }) // Include all association and nested
+          .then((places) => {
+            if (places) {
+                res.status(201).json(places);
+            } else {
+                res.status(404).json({ 'error': 'users not found' });
+            } 
+          })
+          .catch((error) => res.status(500).json({ error }));
+      },
 
 //GET une place selon son ID
     getPlace: function(req, res) {
-        Place.findByPk(req.params.id, {include: { association: '{all: true }'}})
+        Place.findByPk(req.params.id, { include: { all: true, nested: true } })
         .then((place) => { 
             if (place) {
                 res.status(201).json(place);
@@ -51,7 +75,7 @@ module.exports = {
 
 //UPDATE une place à partir de son ID
     updatePlace: function(req, res) {
-        Place.findByPk(req.params.id)
+        Place.findByPk(req.params.id, { include: { all: true, nested: true } })
         .then((place) => {
             Place.update({
                 name: req.body.name,

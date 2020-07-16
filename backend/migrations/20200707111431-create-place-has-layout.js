@@ -10,16 +10,14 @@ module.exports = {
       },
       placeId: {
         type: Sequelize.INTEGER,
-        foreignKey: true,
         allowNull: false,
-        references : {
-          model : "Places",
-          key: "id",
+        references: {
+          model: 'Places',
+          foreignKey: 'id',
         }
       },
       layoutId: {
         type: Sequelize.INTEGER,
-        foreignKey: true,
         allowNull: false,
         references : {
           model : "Layouts",
