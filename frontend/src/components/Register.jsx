@@ -19,12 +19,12 @@ import swal from 'sweetalert';
 import './Style.scss'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
+    // root: {
+    //   '& > *': {
+    //     margin: theme.spacing(1),
+    //     width: '25ch',
+    //   },
+    // },
     button: {
         margin: theme.spacing(1),
     },

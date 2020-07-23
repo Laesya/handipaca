@@ -9,13 +9,21 @@ import {  Collapse,
   NavbarBrand,
   Nav,
   NavItem,
+  Dropdown, 
+  DropdownToggle, 
+  DropdownMenu, 
+  DropdownItem
   } from 'reactstrap';
 
 
 const Navigation = (props) => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const toggleDrop = () => setDropdownOpen(!dropdownOpen);
+
+
 
   const logOut = () => {
     localStorage.clear();
@@ -35,9 +43,18 @@ const Navigation = (props) => {
         <NavItem>
           <Link className="nav-link" to="/faq">F.A.Q</Link>
         </NavItem>
-        <NavItem>
-          <Link className="nav-link" to="/account">Mon Compte</Link>
-        </NavItem>
+        <Dropdown nav isOpen={dropdownOpen} toggle={toggleDrop}>
+          <DropdownToggle nav caret>
+            Profil
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem ><Link className="nav-link" to="/account">Mon compte</Link></DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem > Mes favoris</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem> Mes badges</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <NavItem>
           <Link className="nav-link" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
         </NavItem>
@@ -60,9 +77,18 @@ const Navigation = (props) => {
         <NavItem>
           <Link className="nav-link" to="/register">Administration</Link>
         </NavItem>
-        <NavItem>
-          <Link className="nav-link" to="/account">Mon Compte</Link>
-        </NavItem>
+        <Dropdown nav isOpen={dropdownOpen} toggle={toggleDrop}>
+          <DropdownToggle nav caret>
+            Profil
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem><Link className="nav-link" to="/account">Mon compte</Link></DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem><Link className="nav-link" to="/favorites">Mon favoris</Link></DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem><Link className="nav-link" to="/badges">Mes badges</Link></DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <NavItem>
           <Link className="nav-link" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
         </NavItem>
@@ -102,9 +128,6 @@ const Navigation = (props) => {
     }
   }
   
-
-  //{props.user.token ? renderVisitor(): renderRole()}
-
     return (
       <div>
         <Navbar light expand="md" className="navig">

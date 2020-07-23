@@ -12,6 +12,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Participate from './components/Participate';
 import Account from './components/Account';
+import Favorites from './components/Favorites';
+import Badges from './components/Badges';
 
 import './App.css';
 
@@ -28,6 +30,8 @@ const App = () => {
           <Route  exact path='/list' component={List} />
           <Route  exact path='/participate' component={Participate}/>
           <Route  exact path='/account' component={Account}/>
+          <Route  exact path='/favorites' component={Favorites}/>
+          <Route  exact path='/badges' component={Badges}/>
         </Switch>
       </PersistGate>
     </Provider>
