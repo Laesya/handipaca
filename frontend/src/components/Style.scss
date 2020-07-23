@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+$green :  #377687;
+$brown: #A09284;
+$blue : #001B2E; 
+$hover : #5799B3;
+
+* {
+    font-family: 'Lato', sans-serif !important;
+}
+
+.navig {
+    border-bottom: 1px solid  $brown;
+    .navbar-brand {
+        color: $blue !important;
+    }
+    .position {
+        justify-content: flex-end !important;
+        ul>li>a {
+            color: $green !important;
+            margin-right: 1rem;
+        }
+        ul>li>.signup {
+            color: white !important;
+            background-color: $green;
+            border: 1px solid $green;
+
+        }
+        ul>li>.signin {
+            border: 1px solid $green;
+        }
+    }
+    
+        
+    
+    
+}
+
+    
+
+
+.register {
+    flex-direction: column;
+    justify-content: center !important;
+    display: flex !important;
+    h1 {
+        margin-top: 5rem;
+        color: $blue;
+        display: flex;
+        justify-content: center;
+    }
+    form {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        flex-direction: column !important;
+        display: flex !important;
+        align-items: center;
+        .MuiInputBase-root {
+            color: $blue;
+            cursor: text;
+            font-weight: 400;
+            line-height: 1.1876em;
+            letter-spacing: 0.00938em;
+        }
+        .MuiFormLabel-root {
+            color: $brown;
+        }
+        .MuiInput-underline:before {
+            border-bottom: 1px solid $brown;
+        }
+    }
+    .MuiButton-contained {
+        color: #FFFFFF;
+        box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+        background-color: $green;
+        width: max-content;
+        align-self: center;
+    }
+    .MuiButton-contained:hover {
+        box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+        background-color: $hover;
+    }
+    .MuiButton-outlined {
+        border: 1px solid $brown;
+        color: $brown;
+        padding: 5px 15px;
+        width: max-content;
+        align-self: center;
+    }
+}
+
+.participate {
+    .nav {
+        background-color: #F5F9FB;
+        margin-top: 0;
+    }
+}
