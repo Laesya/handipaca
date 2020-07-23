@@ -9,7 +9,7 @@ module.exports =  {
         const user =  {
             id: req.user.id,
             email: req.user.email,
-            roleId: 3
+            roleId: req.user.roleId
         };
         const token = jwt.sign(user, process.env.JWT_SECRET);
         res.json({ user, token });

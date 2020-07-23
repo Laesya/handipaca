@@ -24,11 +24,7 @@ module.exports = {
 
 //GET les users
     getUsers: function(req, res) {
-        User.findAll({
-            where: {
-              roleId: 3
-            }
-          })
+        User.findAll()
         .then((users) => { 
             if (users) {
                 res.status(201).json(users);
@@ -41,7 +37,7 @@ module.exports = {
 
 //GET un utilisateur selon son ID
     getUser: function(req, res) {
-        User.findByPk(req.params.id, {include: { association: '{all: true }'}})
+        User.findByPk(req.params.id)
         .then((user) => { 
             if (user) {
                 res.status(201).json(user);
