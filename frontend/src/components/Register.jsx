@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { useAuth } from '../context/auth';
+import { connect } from 'react-redux'
+import { signUp } from '../store/actions/auth'
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import Axios from 'axios';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
@@ -14,10 +14,9 @@ import FormControl from '@material-ui/core/FormControl';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { AiOutlineCheck } from 'react-icons/ai';
+import swal from 'sweetalert';
 
 import './Style.scss'
-
-const Api = "http://localhost:5000/api/v1/auth/signup"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,15 +30,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Register = () => {
+const Register = (props) => {
     const classes = useStyles();
     const [pseudonym, setPseudonym] = useState('');    
     const [email, setEmail] = useState('');    
     const [password, setPassword] = useState('');    
     const [showPassword, setShowPassword] = useState(false);    
-    const [isLoggedIn, setLoggedIn] = useState(false);    
-    const [isError, setIsError] = useState(false);    
-    const { setAuthTokens } = useAuth();
+    const [isRegisterIn, setRegisterIn] = useState(false);    
 
     const changePseudo = () => (event) => {
       setPseudonym(event.target.value);
@@ -60,24 +57,24 @@ const Register = () => {
     const handleMouseDownPassword = (event) => {
     event.preventDefault();
     };
-
-    const auth = () => {
-      Axios.post(Api, { pseudonym, email, password})
-      .then(result => {
-          if(result.status === 201) {
-              setLoggedIn(true);
-          } else {
-            console.log(pseudonym,email,password)
-              setIsError(true);
-          }
-      })
-      .catch(error => {
-          setIsError(true);
-      })
-    }
-    if(isLoggedIn) {
-        return <Redirect to="/list"/>;
-    }
+    
+    const auth = async () => {
+      console.log(pseudonym, email, password)
+      const response = await props.signUp({email, password, pseudonym});
+      if(response.status === 'error') {
+          swal({
+              title: "Oh, une erreur !",
+              text: "Il semblerait qu'il y ait une erreur, avez-vous renseigné tous les champs requis ?'",
+              icon: "error",
+              buttons: ["Fermer"],
+            });
+      } else {
+        setRegisterIn(true);
+      }
+  }
+  if(isRegisterIn) {
+      return <Redirect to="/login"/>;
+  }
   return (
     <Container className="register">
         <h1>Bienvenue</h1>
@@ -111,4 +108,11 @@ const Register = () => {
   );
 }
 
-export default Register; 
+const mapStateToProps = (state) => ({
+  auth: state.auth.user
+})
+
+const mapDispatchToProps = {
+  signUp
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

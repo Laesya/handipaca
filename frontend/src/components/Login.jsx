@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { useAuth } from '../context/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import Axios from 'axios';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
@@ -14,10 +12,12 @@ import FormControl from '@material-ui/core/FormControl';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { connect } from 'react-redux'
+import { login } from '../store/actions/auth'
+import swal from 'sweetalert';
 
 import './Style.scss'
 
-const Api = "http://localhost:5000/api/v1/auth/signin"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,13 +33,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
     const classes = useStyles();
-
     const [email, setEmail] = useState('');    
     const [password, setPassword] = useState('');    
     const [showPassword, setShowPassword] = useState(false);    
     const [isLoggedIn, setLoggedIn] = useState(false);    
-    const [isError, setIsError] = useState(false);    
-    const { setAuthTokens } = useAuth();
 
     const changeEmail = () => (event) => {
     setEmail(event.target.value);
@@ -56,25 +53,24 @@ const Login = (props) => {
     const handleMouseDownPassword = (event) => {
     event.preventDefault();
     };
-      
-    const auth = () => {
-        Axios.post(Api, { email, password})
-        .then(result => {
-            if(result.status === 200) {
-                console.log(result.statut)
-                setAuthTokens(result.data);
-                setLoggedIn(true);
-            } else {
-                setIsError(true);
-            }
-        })
-        .catch(error => {
-            setIsError(true);
-        })
-      }
-      if(isLoggedIn) {
-          return <Redirect to="/list"/>;
-      }
+    
+
+    const log = async () => {
+        const response = await props.login(email, password);
+        if(response.status === 'error') {
+            swal({
+                title: "Oh, une erreur !",
+                text: "Il semblerait que vous vous soyez trompé d'adresse mail ou de mot de passe, vous pouvez réessayer ou nous contacter afin que nous vous proposions un nouveau mot de passe",
+                icon: "error",
+                buttons: ["Fermer"],
+              });
+        } else {
+            setLoggedIn(true);
+        }
+    }
+    if(isLoggedIn) {
+        return <Redirect to="/list"/>;
+    }
   return (
     <Container className="register">
         <h1>Connexion</h1>
@@ -101,11 +97,17 @@ const Login = (props) => {
                 />
             </FormControl>
         </form>
-          <Button onClick={auth} variant="contained" className={classes.button} startIcon={<AiOutlineCheck />}> Connexion </Button>
+          <Button onClick={log} variant="contained" className={classes.button} startIcon={<AiOutlineCheck />}> Connexion </Button>
           <Button variant="outlined"><Link to='/register'>Créer un compte</Link></Button>
-          { /*isError && <Error>L'adresse email ou le mot de passe est incorrect</Error>*/}
     </Container>
   );
 }
 
-export default Login; 
+const mapStateToProps = (state) => ({
+    auth: state.auth.user
+})
+  
+const mapDispatchToProps = {
+    login
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

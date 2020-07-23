@@ -1,7 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/auth';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
+import { login, logout } from '../store/actions/auth';
 import {  Collapse,
   Navbar,
   NavbarToggler,
@@ -10,8 +11,8 @@ import {  Collapse,
   NavItem,
   } from 'reactstrap';
 
-const Navigation = () => {
-  const user = useContext(AuthContext);
+
+const Navigation = (props) => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -35,10 +36,10 @@ const Navigation = () => {
           <Link className="nav-link" to="/faq">F.A.Q</Link>
         </NavItem>
         <NavItem>
-          <Link className="nav-link" to="/list">Mon Compte</Link>
+          <Link className="nav-link" to="/account">Mon Compte</Link>
         </NavItem>
         <NavItem>
-          <Link className="nav-link signin" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
+          <Link className="nav-link" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
         </NavItem>
       </Nav>
     )
@@ -60,10 +61,10 @@ const Navigation = () => {
           <Link className="nav-link" to="/register">Administration</Link>
         </NavItem>
         <NavItem>
-          <Link className="nav-link" to="/list">Mon Compte</Link>
+          <Link className="nav-link" to="/account">Mon Compte</Link>
         </NavItem>
         <NavItem>
-          <Link className="nav-link signin" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
+          <Link className="nav-link" to="/login" onClick={() => logOut()}>Se déconnecter</Link>
         </NavItem>
       </Nav>  
     )
@@ -90,33 +91,40 @@ const Navigation = () => {
   }
 
   const renderRole = () => {
-    console.log(user.authTokens.user.roleId,'user.authTokens')
-    if( user.authTokens.user.roleId === 1) {
-    console.log('ADMIN')
+    if(props.auth.roleId === 1) {
       return (
         renderAdmin()
       )
-    }else if (user.authTokens.user.roleId === 3 ) {
-    console.log('USER')
+    }else if (props.auth.roleId === 3 ) {
       return (
         renderUser()
       )
     }
   }
+  
 
+  //{props.user.token ? renderVisitor(): renderRole()}
 
-console.log(user)
     return (
       <div>
         <Navbar light expand="md" className="navig">
           <NavbarBrand href="/">HandiPack</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar className="position">
-            {!user.authTokens ? renderVisitor() : renderRole()}
+            {!props.auth.token ? renderVisitor(): renderRole()}
           </Collapse>
         </Navbar>
       </div>      
     )
 }
 
-export default Navigation;
+const mapStateToProps = (state) => ({
+  auth: state.auth.user
+
+})
+
+const mapDispatchToProps = {
+  login,
+  logout
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
