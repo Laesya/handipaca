@@ -18,7 +18,7 @@ User.create({
     password: "1234",
     liveIn: "Salon-de-Provence",
     hasHandicap : false,
-    roleId : 1
+    roleId : 3
 })
 .then((user) => { console.log(user)})
 .catch((error) => { console.log(error)})

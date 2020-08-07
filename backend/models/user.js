@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsTo(models.Role, {foreignKey: 'roleId', targetKey: 'id', as:'role'});
+      User.hasMany(models.Type_Layout, { as: 'suggestLayout' });
+      User.hasMany(models.Type_Handicap, { as: 'suggestHandi' });
+      User.hasMany(models.Type_Place, { as: 'suggestPlace' });
+      User.hasMany(models.Place, { as: 'places' });
     }
   };
   User.init({

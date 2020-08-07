@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       PlaceHasLayout.belongsTo(models.Place, { foreignKey: 'placeId' });
-      PlaceHasLayout.belongsTo(models.Layout, { foreignKey: 'layoutId' });
+      PlaceHasLayout.belongsTo(models.Type_Layout, { foreignKey: 'layoutId' });
     }
   };
   PlaceHasLayout.init({

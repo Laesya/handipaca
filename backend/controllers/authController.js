@@ -5,11 +5,12 @@ const bcrypt = require('bcrypt');
 
 module.exports =  {
     signIn : function(req, res) {
+        console.log(req ,res )
         /* By default passport save authenticated user in req.user object */
         const user =  {
             id: req.user.id,
             email: req.user.email,
-            roleId: 3
+            roleId: req.user.roleId
         };
         const token = jwt.sign(user, process.env.JWT_SECRET);
         res.json({ user, token });
@@ -65,26 +66,27 @@ module.exports =  {
             }
         })
     },
-
-    changePassword: function(res, req, next) {
-        User.findOne({ where : { email : req.body.email }})
-        .then((user) => {
-            if(user) {
-                bcrypt.compare(req.body.oldPassword, user.dataValues.password, function(err, result){
-                    if(result){
-                        user.update({password: req.body.password})
-                        .then((updatedUser) => { 
-                            res.json({user: updatedUser});
-                        })
-                        .catch((err) => {
-                            res.status(500).json({error});
-                        })
-                    }
-                })
+    changePassword: function (req, res, next) {
+        User.findOne({ where: { email: req.body.email } })
+          .then((user) => {
+            if (user) {
+              bcrypt.compare(req.body.oldPassword, user.dataValues.password, function (err, result) {
+                if (result) {
+                    bcrypt.hash(req.body.password, 5 , function(err, hash) {
+                        // Store hash in your password DB.
+                        user.update({ password: hash })
+                        .then((updatedUser) => { res.json({ user: updatedUser }); })
+                        .catch((error) => { res.status(500).json({ error }); });
+                    });
+                  
+                } else {
+                  res.status(401).json({ message: 'Invalid password' });
+                }
+              });
             } else {
-                res.status(404).json({ message : 'User not found' })
+              res.status(404).json({ message: 'User not found' });
             }
-        })
-        .catch((error) => { res.status(500).json({error})})
-    }
+          })
+          .catch((error) => { res.status(500).json({ error }); });
+      },
 }
