@@ -11,6 +11,7 @@ module.exports = {
             where: {
               roleId: 1
             },
+            include : 'suggestLayout',
           })
         .then((users) => { 
             if (users) {
@@ -24,7 +25,7 @@ module.exports = {
 
 //GET les users
     getUsers: function(req, res) {
-        User.findAll()
+        User.findAll({include : ['suggestLayout', 'suggestHandi', 'suggestPlace']})
         .then((users) => { 
             if (users) {
                 res.status(201).json(users);
@@ -37,7 +38,7 @@ module.exports = {
 
 //GET un utilisateur selon son ID
     getUser: function(req, res) {
-        User.findByPk(req.params.id)
+        User.findByPk(req.params.id, {include : ['suggestLayout', 'suggestHandi', 'suggestPlace', 'places']})
         .then((user) => { 
             if (user) {
                 res.status(201).json(user);
@@ -48,11 +49,11 @@ module.exports = {
         .catch((error) => { res.status(500).json({ error}) });
     },
 
-//UPDATE un uilisateur à partir de son ID
+//UPDATE un utilisateur à partir de son ID
     updateUser: function(req, res) {
         User.findByPk(req.params.id)
-        .then((User) => {
-            User.update({
+        .then((user) => {
+            user.update({
                 pseudonym: req.body.pseudonym,
                 email: req.body.email,
                 password: req.body.password,
@@ -60,11 +61,13 @@ module.exports = {
                 hasHandicap: req.body.hasHandicap,
                 RoleId: req.body.RoleId
             })
-        ;})
-        .then((User) => { res.status(201).json({ User });             
-    })
-        .catch((error) => res.status(500).json({ error }));
+                .then((user) => res.json({ user }))
+                .catch((error) => res.json({ error }));
+        })
+        .catch((error) => { res.status(404).json({ error }); });
     },
+    
+    
 
 //DELETE un utilisateur à partir de son ID
     deleteUser: function(req, res) {

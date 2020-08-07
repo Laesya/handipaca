@@ -23,3 +23,4 @@ const jwtAuthStrategy = passport.use(new JwtStrategy(opts, function (jwt_payload
 }));
 
 module.exports.jwtAuthStrategy = this.jwtAuthStrategy;
+

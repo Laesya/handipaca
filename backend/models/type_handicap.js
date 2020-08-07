@@ -10,10 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Type_Handicap.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id' });
     }
   };
   Type_Handicap.init({
     name: DataTypes.STRING,
+    isValid: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER
   }, {
     sequelize,

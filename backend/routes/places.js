@@ -7,5 +7,7 @@ router.get('/', placesController.getPlaces);
 router.get('/:id(\\d+)/', placesController.getPlace);
 router.put('/:id(\\d+)/', placesController.updatePlace);
 router.delete('/:id(\\d+)/', placesController.deletePlace);
+router.get('/creator/:id(\\d+)/', placesController.findByUserId);
+
 
 module.exports = router;

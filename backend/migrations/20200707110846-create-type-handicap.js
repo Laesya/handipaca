@@ -11,8 +11,16 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      userId: { 
-        type: Sequelize.INTEGER
+      isValid: {
+        type: Sequelize.BOOLEAN
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Users',
+          foreignKey: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

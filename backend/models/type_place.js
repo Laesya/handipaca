@@ -10,11 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Type_Place.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'id' });
+      Type_Place.hasMany(models.Place, { as: 'places' });
     }
   };
   Type_Place.init({
     name: DataTypes.STRING,
+    isValid: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER
   }, {
     sequelize,
