@@ -1,0 +1,12 @@
+export const FETCH_TYPES_PLACES = 'FETCH_TYPE_PLACES';
+
+export const FETCH_TYPE_PLACE   = 'FETCH_TYPE_PLACE ';
+
+export const CREATE_TYPE_PLACE   = 'CREATE_TYPE_PLACE';
+
+export const UPDATE_TYPE_PLACE   = 'UPDATE_TYPE_PLACE';
+
+export const DELETE_TYPE_PLACE   = 'DELETE_TYPE_PLACE';
+
+// Errors
+export const ERROR_IN_TYPE_PLACES = 'ERROR_IN_TYPE_PLACES';

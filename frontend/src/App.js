@@ -10,7 +10,9 @@ import List from './components/List';
 import FAQ from './components/FAQ';
 import Register from './components/Register';
 import Login from './components/Login';
-import Participate from './components/Participate';
+import AddPlace from './components/participate/AddPlace';
+import SuggestType from './components/participate/SuggestType';
+import Profile from './components/Profile';
 import Account from './components/Account';
 import Favorites from './components/Favorites';
 import Badges from './components/Badges';
@@ -28,7 +30,9 @@ const App = () => {
           <Route  exact path='/register' component={Register}/>
           <Route  exact path='/login' component={Login}/>
           <Route  exact path='/list' component={List} />
-          <Route  exact path='/participate' component={Participate}/>
+          <Route  exact path='/addPlace' component={AddPlace}/>
+          <Route  exact path='/suggest'component={SuggestType}/>
+          <Route  exact path='/profil' component={Profile}/>
           <Route  exact path='/account' component={Account}/>
           <Route  exact path='/favorites' component={Favorites}/>
           <Route  exact path='/badges' component={Badges}/>

@@ -1,0 +1,7 @@
+export const FETCH_PLACES = 'FETCH_PLACES';
+export const BUILD_PLACE = 'BUILD_PLACE';
+export const RESET_PLACE = 'RESET_PLACE';
+export const BUILD_PLACE_LAYOUTS = 'BUILD_PLACE_LAYOUTS';
+export const CREATE_PLACE = 'CREATE_PLACE';
+export const ERROR_IN_PLACE = 'ERROR_IN_PLACE';
+

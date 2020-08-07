@@ -1,14 +1,17 @@
 import React, {useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
+import {
+    Container,
+    TextField,
+    Button, 
+    IconButton, 
+    FilledInput,
+    Input, 
+    InputLabel, 
+    InputAdornment, 
+    FormControl
+} from '@material-ui/core';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { AiOutlineCheck } from 'react-icons/ai';
@@ -75,26 +78,27 @@ const Login = (props) => {
     <Container className="register">
         <h1>Connexion</h1>
         <form className={classes.root} noValidate autoComplete="off">
-        <TextField label="Adresse Email" onChange={changeEmail()} value={email}/>
-            <FormControl >
-                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                <Input
-                    id="standard-adornment-password standard-required"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={changePassword('password')}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            >
-                            {showPassword ? <FaEye /> : <FaEyeSlash />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                />
+            <TextField label="Adresse Email" variant="filled" onChange={changeEmail()} value={email}/>
+            <FormControl className={classes.textField} variant="filled">
+              <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+              <FilledInput
+                id="filled-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={changePassword('password')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        variant="filled"
+                    >
+                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
             </FormControl>
         </form>
           <Button onClick={log} variant="contained" className={classes.button} startIcon={<AiOutlineCheck />}> Connexion </Button>

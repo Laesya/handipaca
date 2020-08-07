@@ -8,8 +8,29 @@ $hover : #5799B3;
     font-family: 'Lato', sans-serif !important;
 }
 
+body {
+    background-color: #FEFFFF !important;
+    height: 100% !important;
+}
+.disabled-link {
+    pointer-events: none;
+}
+.header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+        margin-top: 2rem;
+        color: $blue;
+    }
+    .subtitle {
+        color: $blue;
+    }
+} 
+
 .navig {
     border-bottom: 1px solid  $brown;
+    background-color : #FFFFFF;
     .navbar-brand {
         color: $blue !important;
     }
@@ -28,11 +49,7 @@ $hover : #5799B3;
         ul>li>.signin {
             border: 1px solid $green;
         }
-    }
-    
-        
-    
-    
+    } 
 }
 
     
@@ -47,6 +64,73 @@ $hover : #5799B3;
         color: $blue;
         display: flex;
         justify-content: center;
+    }
+    form {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        flex-direction: column !important;
+        display: flex !important;
+        align-items: center;
+        .MuiFormControl-root {
+            min-width: 250px;
+        }
+        .MuiInputBase-root {
+            color: $blue;
+            cursor: text;
+            font-weight: 400;
+            line-height: 1.1876em;
+            letter-spacing: 0.00938em;
+            background-color: #FFFFFF;
+            border: 1px solid $brown;
+            margin-bottom: 8px;
+        }
+        .MuiFormLabel-root {
+            color: $brown;
+        }
+        .MuiInput-underline:before {
+            border-bottom: 1px solid $brown;
+        }
+    }
+    .MuiButton-contained {
+        color: #FFFFFF;
+        box-shadow: unset;
+        background-color: $green;
+        width: max-content;
+        align-self: center;
+        border-radius: unset;
+    }
+    .MuiButton-contained:hover {
+        box-shadow: unset;
+        background-color: $hover;
+    }
+    .MuiButton-outlined {
+        border: none;
+        color: #A09284;
+        padding: 5px 15px;
+        width: max-content;
+        align-self: center;
+        text-transform: initial;
+        span {
+            a {
+                color: $green;
+            }
+        }
+    }
+    .MuiButton-outlined:hover {
+        border: none;
+        color: #ffffff;
+        padding: 5px 15px;
+        width: max-content;
+        align-self: center;
+        text-transform: initial;
+        background-color: $green;
+        border-radius: unset;
+        span {
+            a {
+                color: #FFFFFF;
+                text-decoration: unset;
+            }
+        }
     }
 }
 
@@ -79,43 +163,239 @@ $hover : #5799B3;
             align-self: flex-start !important;
         }
     }
+    .makeStyles-root-1  {
+        flex-direction: column !important;
+        display: flex !important;
+        align-items: center !important;
+        .MuiFormControl-root {
+            min-width: 300px;
+        }
+        .pseudo {
+            color: $blue;
+            cursor: text;
+            font-weight: 400;
+            line-height: 1.1876em;
+            letter-spacing: 0.00938em;
+            background-color: #FFFFFF;
+            border: 1px solid $brown;
+            margin-bottom: 8px;
+            .MuiFormLabel-root {
+                color: $brown;
+            }
+            .MuiInput-underline:before {
+                border-bottom: 1px solid $brown;
+            }
+            .MuiFilledInput-root {
+                background-color: #FFFFFF;
+            }
+        }
+    }
+    .MuiButton-contained {
+        color: #FFFFFF;
+        box-shadow: unset;
+        background-color: $green;
+        width: max-content;
+        align-self: center;
+        border-radius: unset;
+    }
+    .MuiButton-contained:hover {
+        box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+        background-color: $hover;
+    }
+    .MuiFormControl-root{
+        display: flex
+    }
 }
 
-form {
+.profil {
+    .header {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+            margin-top: 2rem;
+            color: $blue;
+        }
+    } 
+    .MuiAvatar-colorDefault {
+        color: #FFFFFF;
+        background-color: $blue;
+    }
+    .MuiAvatar-root {
+        width: 80px;
+        height: 80px;
+        font-size: 2.25rem;
+    }
+    .MuiTypography-root {
+        color: $blue !important;
+    }
+}
+
+.suggest {
+    .subtitle {
+        margin-bottom: 0;
+    }
+    .formulaires {
+        display: flex;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+        form {
+            flex-direction: column;
+            text-align: center;
+            display: flex;
+            text-align: center;
+            align-items: center;
+
+            h2 {
+                font-size: 17px;
+                margin: 2rem auto 2rem auto;
+                text-align: center;
+            }
+            .MuiButton-contained {
+                color: #FFFFFF !important;
+                box-shadow: unset !important;
+                background-color: $green !important;
+                width: max-content !important;
+                align-self: center !important;
+            }
+            .MuiButton-contained:hover {
+                box-shadow: unset !important;
+                background-color: $hover !important;
+            }
+            .MuiFilledInput-root {
+                color: $blue;
+                cursor: text;
+                font-weight: 400;
+                line-height: 1.1876em;
+                letter-spacing: 0.00938em;
+                background-color: #FFFFFF;
+                border: 1px solid $brown;
+                margin-bottom: 8px;
+                .MuiFormLabel-root {
+                    color: $brown;
+                }
+                .MuiInput-underline:before {
+                    border-bottom: 1px solid $brown;
+                }
+                .MuiFilledInput-root {
+                    background-color: #FFFFFF;
+                }
+            }
+        }
+    }  
+}
+
+.addPlace {
+    .subtitle {
+        margin-bottom: 3rem;
+    }
+    .formulaires {
+        display: flex;
+        flex-wrap: wrap;
+        margin:auto;
+        form {
+            flex-direction: column;
+            text-align: center;
+            display: flex;
+            h2 {
+                font-size: 17px;
+                margin: 2rem auto 2rem auto;
+                text-align: start;
+            }
+            .MuiButton-contained {
+                color: #FFFFFF !important;
+                box-shadow: unset !important;
+                background-color: $green !important;
+                width: max-content !important;
+                align-self: center !important;
+            }
+            .MuiButton-contained:hover {
+                box-shadow: unset !important;
+                background-color: $hover !important;
+            }
+            .MuiFormControl-root {
+                min-width: 300px;
+            }
+            .MuiFilledInput-root {
+                color: $blue;
+                cursor: text;
+                font-weight: 400;
+                line-height: 1.1876em;
+                letter-spacing: 0.00938em;
+                background-color: #FFFFFF;
+                border: 1px solid $brown;
+                margin-bottom: 8px;
+                .MuiFormLabel-root {
+                    color: $brown;
+                }
+                .MuiInput-underline:before {
+                    border-bottom: 1px solid $brown;
+                }
+                .MuiFilledInput-root {
+                    background-color: #FFFFFF;
+                }
+            }
+        }
+    }  
+}
+
+.list {
+    display: flex;
+    justify-content: space-evenly;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    flex-direction: column !important;
-    display: flex !important;
-    align-items: center;
-    .MuiInputBase-root {
-        color: $blue;
-        cursor: text;
-        font-weight: 400;
-        line-height: 1.1876em;
-        letter-spacing: 0.00938em;
+    flex-wrap: wrap;
+    .makeStyles-root-1 {
+        margin-top: 2rem;
     }
-    .MuiFormLabel-root {
-        color: $brown;
+    .MuiCardHeader-root {
+        .MuiCardHeader-title {
+            color: $brown !important;
+            font-size: 21px
+        }
+        .MuiAvatar-root {
+            width: 50px;
+            height: 50px;
+        }
+    }  
+    .MuiCardContent-root {
+        .title {
+            font-size : 20px;
+            margin-bottom: 0;
+            color: $blue
+        }
+        .adress {
+            font-size: 14px;
+            color: $brown;
+            min-width: 270px;
+        }
+        .action {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            .MuiButton-contained {
+                color: #FFFFFF;
+                background-color: $green;
+                width: max-content;
+                align-self: center;
+                text-transform: initial;
+                a {
+                    color: #FFFFFF;
+                }
+            }
+            .MuiButton-contained:hover {
+                background-color: $hover;
+            }
+        }
     }
-    .MuiInput-underline:before {
-        border-bottom: 1px solid $brown;
+    .MuiCardActions-root {
+        justify-content: center;
+        .MuiIconButton-root {
+            color: $brown;
+            font-size: 2.5rem;
+        }
+        .love {
+            color: $green
+        }
     }
-}
-.MuiButton-contained {
-    color: #FFFFFF;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-    background-color: $green;
-    width: max-content;
-    align-self: center;
-}
-.MuiButton-contained:hover {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
-    background-color: $hover;
-}
-.MuiButton-outlined {
-    border: 1px solid $brown;
-    color: $brown;
-    padding: 5px 15px;
-    width: max-content;
-    align-self: center;
 }

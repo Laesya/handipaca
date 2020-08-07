@@ -25,12 +25,10 @@ export function login(email, password) {
   };
   
   export function signUp(userData) {
-    console.log(userData)
     return async dispatch => {
       function onSuccess(response) {
         // set token as default header
         axios.defaults.headers.common['Authorization'] = `bearer ${response.data.token}`;
-  
         dispatch({ type: LOGIN, payload: response.data });
         return { response, status: 'success' };
       }
@@ -48,9 +46,10 @@ export function login(email, password) {
     };
   };  
   
-  export function editPassword(oldPassword, password) {
+  export function editPassword(userData) {
     return async (dispatch, getState) => {
       function onSuccess(response) {
+        axios.defaults.headers.common['Authorization'] = `bearer ${response.data.token}`;
         dispatch({ type: CHANGE_PASSWORD, payload: response.data });
         return { response, status: 'success' };
       }
@@ -59,9 +58,9 @@ export function login(email, password) {
         return { error, status: 'error' };
       }
       try {
-        const response = await axios.put(`${api}/changePassword`,
-          { oldPassword, password, email: getState().auth.user.email },
-          { headers: { Authorization: `bearer ${getState().auth.user.token}` } }
+        const response = await axios.put(`${api}/auth/changePassword`,
+        
+          userData,
         );
         return onSuccess(response);
       }
